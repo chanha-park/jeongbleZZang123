@@ -17,10 +17,10 @@ fail=0
 for num in $(seq 0 $num_exercise)
 do
 	testsrc="$testdir""ex0$num/""${filename[$num]}"
-	# usersrc="$userdir""ex0$num/""${filename[$num]}"
+	usersrc="$userdir""ex0$num/""${filename[$num]}"
 	main="$testdir""ex0$num/""main.c"
 	gcc -Wall -Wextra -Werror "$main" "$testsrc" "$utilsdir"*.c -o "test0$num.out"
-	# gcc -Wall -Wextra -Werror "$main" "$usersrc" "$utilsdir"*.c -o "user0$num.out"
+	gcc -Wall -Wextra -Werror "$main" "$usersrc" "$utilsdir"*.c -o "user0$num.out"
 	if [ $(echo $?) -gt 0 ]
 	then
 		echo "compile error in ex0$num"
@@ -30,7 +30,7 @@ do
 
 	./test0$num.out > test.output 2> test.error
 	ret1=$(echo $?)
-	# ./user.out > user.output 2> user.error
+	./user0$num.out > user.output 2> user.error
 	ret2=$(echo $?)
 
 	if [ $ret1 != $ret2 ]
@@ -41,24 +41,24 @@ do
 		break
 	fi
 
-	# diff user.output test.output > diff.output
-	# diff user.error test.error > diff.error
+	diff user.output test.output > diff.output
+	diff user.error test.error > diff.error
 
-	# if [ $(cat diff.output | wc -l) -gt 0 ]
-	# then
-	#     echo "Fail in ex0$num"
-	#     fail=1
-	#     break
-	# else
-	#     if [ $(cat diff.error | wc -l) -gt 0 ]
-	#     then
-	#         echo "Fail in ex0$num"
-	#         fail=1
-	#         break
-	#     else
-	#         echo "Success"
-	#     fi
-	# fi
+	if [ $(cat diff.output | wc -l) -gt 0 ]
+	then
+		echo "Fail in ex0$num"
+		fail=1
+		break
+	else
+		if [ $(cat diff.error | wc -l) -gt 0 ]
+		then
+			echo "Fail in ex0$num"
+			fail=1
+			break
+		else
+			echo "Success"
+		fi
+	fi
 done
 
 rm -rf test*.out
@@ -66,9 +66,11 @@ rm -rf user*.out
 
 rm -rf test*.output
 rm -rf user*.output
+rm -rf diff.output
 
 rm -rf test*.error
 rm -rf user*.error
+rm -rf diff.error
 
 if [ $fail == 0 ]
 then
