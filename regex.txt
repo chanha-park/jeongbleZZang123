@@ -1,0 +1,19 @@
+eleven number  "[0-9]{11}"
+
+phone number "010-[0-9]{3,4}-[0-9]{4}"
+
+push swap "^(?:(p[a|b])|(r{1,2}[a|b|r])|(s[a|b|s]))\x0a$"
+
+snake case "^([a-z]+)(_[a-z]+)*$"
+
+camel case "^([A-Z][a-z]+)+$"
+
+email "^((?![42seoul])[a-zA-Z0-9])+@[a-zA-Z0-9]+\.[a-z]{2,3}$"
+
+
+
+
+%([-+#0])?(\d+|\*)?(\.(\d+|\*))?([hljztL]|hh|ll)?([diuoxXfFeEgGaAcspn])
+%([0 #+-])?[0-9*]*\.?\d*([hl]{0,2}|[jztL])?[diuoxXeEfgGaAcpsSn%]
+
+%([0 #+-])?[0-9*]*(\.[0-9]*)?([hl]{0,2}|[jztL])?[diuoxXeEfgGaAcpsSn%]
