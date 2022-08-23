@@ -2,5 +2,5 @@
 
 void	check_leaks(void)
 {
-	system("leaks --quiet $PPID > /dev/null ; echo $?");
+	system("leaks --quiet $PPID > /dev/null ; echo leaks: $?");
 }
