@@ -6,34 +6,42 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 10:42:14 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 10:42:15 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/24 14:10:47 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <regex.h>
 #include <unistd.h>
 
-void	eleven_number_checker(char *input)
+static int	ft_isdigit(char c)
 {
-	regex_t		reg;
-	regmatch_t	pmatch[1];
-	char		*pattern;
-	int			ret;
+	return ('0' <= c && c <= '9');
+}
 
-	if (!input)
+void	eleven_number_checker(const char *str)
+{
+	int		phone_number;
+	int		i;
+
+	if (!str)
 		return ;
-	pattern = "^[0-9]{11}$";
-	ret = regcomp(&reg, pattern, REG_EXTENDED);
-	if (ret != 0)
-		return ;
-	ret = regexec(&reg, input, 0, pmatch, 0);
-	if (ret != 0)
+	phone_number = 0;
+	i = 0;
+	while (*(str + i))
 	{
-		write(1, "KO\n", 3);
+		if (ft_isdigit(*(str + i)))
+		{
+			phone_number++;
+			if (phone_number == 11)
+			{
+				write(1, str + i - 10, 11);
+				write(1, "\n", 1);
+				return ;
+			}
+		}
+		else
+			phone_number = 0;
+		i++;
 	}
-	else
-	{
-		write(1, "OK\n", 3);
-	}
-	regfree(&reg);
+	write(1, "KO\n", 3);
+	return ;
 }

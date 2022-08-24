@@ -6,47 +6,34 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 10:42:28 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 10:48:07 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/24 14:17:23 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <regex.h>
 #include <unistd.h>
 
-static void	write_match_string(regex_t *reg, char *input, regmatch_t *pmatch)
+void	phone_number_checker(const char *str)
 {
-	int			ret;
-
-	while (1)
-	{
-		ret = regexec(reg, input, 1, pmatch, 0);
-		if (ret != 0)
-			break ;
-		write(1, input + pmatch[0].rm_so, pmatch[0].rm_eo - pmatch[0].rm_so);
-		input += pmatch[0].rm_eo;
-	}
-	write(1, "\n", 1);
-}
-
-void	phone_number_checker(char *input)
-{
-	regex_t		reg;
+	regex_t		preg;
 	regmatch_t	pmatch[1];
 	char		*pattern;
-	int			ret;
+	int			len;
+	int			index;
 
-	if (!input)
+	if (!str)
 		return ;
-	pattern = "01[0-9]-[0-9]{3,4}-[0-9]{4}";
-	ret = regcomp(&reg, pattern, REG_EXTENDED);
-	if (ret != 0)
-		return ;
-	ret = regexec(&reg, input, 1, pmatch, 0);
-	if (ret != 0)
-		write(1, "KO\n", 3);
-	else
+	pattern = "010-[0-9]{3,4}-[0-9]{4}";
+	regcomp(&preg, pattern, REG_EXTENDED);
+	index = 0;
+	while (!regexec(&preg, str + index, 1, pmatch, 0))
 	{
-		write_match_string(&reg, input, pmatch);
+		len = pmatch[0].rm_eo - pmatch[0].rm_so;
+		write(1, str + index + pmatch[0].rm_so, len);
+		write(1, "\n", 1);
+		index += pmatch[0].rm_eo;
 	}
-	regfree(&reg);
+	if (!index)
+		write(1, "KO\n", 3);
+	regfree(&preg);
 }
