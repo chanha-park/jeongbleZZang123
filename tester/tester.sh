@@ -2,7 +2,6 @@
 
 num_exercise="4"
 
-testdir="./srcs/"
 userdir="../"
 utilsdir="./utils/"
 
@@ -29,30 +28,22 @@ gcc -Wall -Wextra -Werror "$utilsdir""$gnl" "$utilsdir""$ckheader" -o "header_ch
 
 for num in $(seq 0 $num_exercise)
 do
-	testoutput="$testdir""ex0$num/""test$num.output"
+	testoutput="tests0$num/""test$num.output"
 	usersrc="$userdir""ex0$num/""${filename[$num]}"
-	main="$testdir""ex0$num/""main.c"
+	main="tests0$num/""main.c"
 
 	echo
 	echo -e "${BLUE}Check Forbidden Header${NOCOLOR}"
 
-	./header_checker "$usersrc"
+	echo "ex0$num" > "header.log"
+	./header_checker "$usersrc" >> "header.log"
 	if [ $? != 0 ]
 	then
 		echo -e "${RED}Forbidden Header in ex0$num${NOCOLOR}"
 		fail=1
 		break
-	fi
-
-	echo
-	echo -e "${BLUE}Check Norminette${NOCOLOR}"
-
-	norminette "$usersrc"
-	if [ $? != 0 ]
-	then
-		echo -e "${RED}Norm Error in ex0$num${NOCOLOR}"
-		fail=1
-		break
+	else
+		rm -rf "header.log"
 	fi
 
 	echo
@@ -70,7 +61,7 @@ do
 	ret=$(echo $?)
 
 	echo
-	echo -e "${BLUE}Check Unexpected Exit${NOCOLOR}"
+	echo -e "${BLUE}Check Exit Status${NOCOLOR}"
 
 	if [ $ret != 0 ]
 	then

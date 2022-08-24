@@ -6,7 +6,7 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:10:59 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/25 01:06:41 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/25 04:16:28 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include "get_next_line.h"
 
 static int	ft_regex(const char *pattern, char *input, regmatch_t *pmatch)
@@ -50,7 +51,10 @@ static int	find_forbidden_header(char *filename, char *line)
 		{
 			if (strstr(filename, "eleven_number_checker.c") != 0 \
 					|| strcmp("regex", buffer) != 0)
+			{
+				printf("%s\n", buffer);
 				return (1);
+			}
 		}
 	}
 	return (0);
