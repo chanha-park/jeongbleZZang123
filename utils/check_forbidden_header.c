@@ -6,7 +6,7 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:10:59 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 13:17:53 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:06:41 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	find_forbidden_header(char *filename, char *line)
 	size_t		len;
 	regmatch_t	pmatch[2];
 
-	pattern = "#[ ]?include <([a-z]+[/]?[a-z]+)\\.h>";
+	pattern = "#[ ]*include[ ]*<([a-z]+[/]?[a-z]+)\\.h>";
 	if (ft_regex(pattern, line, pmatch) == 0)
 	{
 		len = pmatch[1].rm_eo - pmatch[1].rm_so;

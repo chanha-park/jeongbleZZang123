@@ -10,6 +10,8 @@ ckheader="check_forbidden_header.c"
 ckleaks="check_leaks.c"
 gnl="get_next_line.c"
 
+timeout=10
+
 filename[0]="eleven_number_checker.c"
 filename[1]="phone_number_checker.c"
 filename[2]="simple_password_validator.c"
@@ -86,6 +88,7 @@ do
 	if [ $(cat diff.output | wc -l) -gt 0 ]
 	then
 		echo -e "${RED}Fail in ex0$num${NOCOLOR}"
+		cat diff.output
 		fail=1
 		break
 	else
