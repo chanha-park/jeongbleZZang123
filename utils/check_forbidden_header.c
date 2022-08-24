@@ -6,7 +6,7 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:10:59 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 12:11:58 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:57:28 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	find_forbidden_header(char *filename, char *line)
 		buffer[len] = '\0';
 		if (strcmp("unistd", buffer) != 0)
 		{
-			if (strcmp(filename, "eleven_number_checker.c") == 0 \
+			if (strstr(filename, "eleven_number_checker.c") != 0 \
 					|| strcmp("regex", buffer) != 0)
 				return (1);
 		}
@@ -79,5 +79,5 @@ int	main(int argc, char **argv)
 	close(fd);
 	if (forbiden_header_flag)
 		write(1, "Forbidden Header!\n", 18);
-	return (0);
+	return (forbiden_header_flag);
 }
