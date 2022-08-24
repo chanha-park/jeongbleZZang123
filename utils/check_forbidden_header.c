@@ -6,7 +6,7 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:10:59 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 12:57:28 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:17:53 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,5 @@ int	main(int argc, char **argv)
 		free(line);
 	}
 	close(fd);
-	if (forbiden_header_flag)
-		write(1, "Forbidden Header!\n", 18);
 	return (forbiden_header_flag);
 }

@@ -16,28 +16,50 @@ filename[2]="simple_password_validator.c"
 filename[3]="push_swap_instruction_validator.c"
 filename[4]="snake_ToCamel.c"
 
+RED="\x1b[38;5;160m"
+BLUE="\x1b[38;5;38m"
+NOCOLOR="\x1b[0;0m"
+
 fail=0
 
 gcc -Wall -Wextra -Werror "$utilsdir""$gnl" "$utilsdir""$ckheader" -o "header_checker"
 
 for num in $(seq 0 $num_exercise)
 do
-	# compile and check error
 	testsrc="$testdir""ex0$num/""${filename[$num]}"
 	usersrc="$userdir""ex0$num/""${filename[$num]}"
 	main="$testdir""ex0$num/""main.c"
 
+	echo
+	echo -e "${BLUE}Check Forbidden Header${NOCOLOR}"
+
 	./header_checker "$usersrc"
 	if [ $? != 0 ]
 	then
+		echo -e "${RED}Forbidden Header in ex0$num${NOCOLOR}"
 		fail=1
 		break
 	fi
+
+	echo
+	echo -e "${BLUE}Check Norminette${NOCOLOR}"
+
+	norminette "$usersrc"
+	if [ $? != 0 ]
+	then
+		echo -e "${RED}Norm Error in ex0$num${NOCOLOR}"
+		fail=1
+		break
+	fi
+
+	echo
+	echo -e "${BLUE}Compile and Check Error${NOCOLOR}"
+
 	gcc -Wall -Wextra -Werror "$main" "$testsrc" "$utilsdir""$ckleaks" -o "test0$num.out"
 	gcc -Wall -Wextra -Werror "$main" "$usersrc" "$utilsdir""$ckleaks" -o "user0$num.out"
 	if [ $(echo $?) -gt 0 ]
 	then
-		echo "compile error in ex0$num"
+		echo -e "${RED}compile error in ex0$num${NOCOLOR}"
 		fail=1
 		break
 	fi
@@ -47,11 +69,13 @@ do
 	./user0$num.out > user.output 2> user.error
 	ret2=$(echo $?)
 
-	# check unexpected exit
+	echo
+	echo -e "${BLUE}Check Unexpected Exit${NOCOLOR}"
+
 	if [ $ret1 != $ret2 ]
 	then
-		echo "Fail in ex0$num"
-		echo "exit status: $ret1 vs $ret2"
+		echo -e "${RED}Fail in ex0$num${NOCOLOR}"
+		echo -e "${RED}exit status: $ret1 vs $ret2${NOCOLOR}"
 		fail=1
 		break
 	fi
@@ -59,20 +83,22 @@ do
 	diff user.output test.output > diff.output
 	diff user.error test.error > diff.error
 
-	# diff stdout && stderr
+	echo
+	echo -e "${BLUE}Compare Result${NOCOLOR}"
+
 	if [ $(cat diff.output | wc -l) -gt 0 ]
 	then
-		echo "Fail in ex0$num"
+		echo -e "${RED}Fail in ex0$num${NOCOLOR}"
 		fail=1
 		break
 	else
 		if [ $(cat diff.error | wc -l) -gt 0 ]
 		then
-			echo "Fail in ex0$num"
+			echo -e "${RED}Fail in ex0$num${NOCOLOR}"
 			fail=1
 			break
 		else
-			echo "Success"
+			echo -e "${BLUE}Success ex0$num${NOCOLOR}"
 		fi
 	fi
 done
@@ -92,20 +118,6 @@ rm -rf diff.error
 
 if [ $fail == 0 ]
 then
-	echo "Success!"
+	echo -e "${BLUE}All Success!${NOCOLOR}"
 fi
 exit $fail
-
-# ARG[0]="testcase 0"
-# ARG[1]="testcase 1"
-# ARG[2]="testcase 2"
-# ARG[3]="testcase 3"
-# ARG[4]="testcase 4"
-# ARG[5]="testcase 5"
-# ARG[6]="testcase 6"
-# ARG[7]="testcase 7"
-
-# for f in ${ARG[@]}
-# do
-#     echo "$f"
-# done
