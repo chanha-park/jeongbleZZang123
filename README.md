@@ -2,7 +2,7 @@
 
 This is the `Regular Expression` (Regex) Dash project. 
 
-Dash is 30 min to 2 hour long, snacky PBL project.
+Dash is 30 min to 2 hour long PBL project.
 You will learn the basics of Regex in our project.
 
 ## Project Goal
