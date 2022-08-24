@@ -24,6 +24,13 @@ NOCOLOR="\x1b[0;0m"
 
 fail=0
 
+echo 'Usage:'
+echo '|- tester/tester.sh'
+for n in 0 1 2 3 4
+do
+	echo "|- ex0$n/${filename[$n]}"
+done
+
 gcc -Wall -Wextra -Werror "$utilsdir""$gnl" "$utilsdir""$ckheader" -o "header_checker"
 
 for num in $(seq 0 $num_exercise)
