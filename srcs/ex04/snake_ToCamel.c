@@ -33,11 +33,11 @@ void	snake_ToCamel(char *input)
 	ret = regexec(&reg_snake, input, 2, pmatch, 0);
 	if (ret != 0)
 	{
-		printf("not snake case\n");
+		write(1, "not snake case\n", 15);
 	}
 	else
 	{
-		printf("snake pattern\n");
+		write(1, "snake pattern\n", 14);
 		while (1)
 		{
 			ret = regexec(&reg_snake, input + offset, 2, pmatch, 0);
