@@ -27,7 +27,7 @@ gcc -Wall -Wextra -Werror "$utilsdir""$gnl" "$utilsdir""$ckheader" -o "header_ch
 
 for num in $(seq 0 $num_exercise)
 do
-	testsrc="$testdir""ex0$num/""${filename[$num]}"
+	testoutput="$testdir""ex0$num/""test$num.output"
 	usersrc="$userdir""ex0$num/""${filename[$num]}"
 	main="$testdir""ex0$num/""main.c"
 
@@ -56,7 +56,6 @@ do
 	echo
 	echo -e "${BLUE}Compile and Check Error${NOCOLOR}"
 
-	gcc -Wall -Wextra -Werror "$main" "$testsrc" "$utilsdir""$ckleaks" -o "test0$num.out"
 	gcc -Wall -Wextra -Werror "$main" "$usersrc" "$utilsdir""$ckleaks" -o "user0$num.out"
 	if [ $(echo $?) -gt 0 ]
 	then
@@ -65,24 +64,21 @@ do
 		break
 	fi
 
-	./test0$num.out > test.output 2> test.error
-	ret1=$(echo $?)
 	./user0$num.out > user.output 2> user.error
-	ret2=$(echo $?)
+	ret=$(echo $?)
 
 	echo
 	echo -e "${BLUE}Check Unexpected Exit${NOCOLOR}"
 
-	if [ $ret1 != $ret2 ]
+	if [ $ret != 0 ]
 	then
 		echo -e "${RED}Fail in ex0$num${NOCOLOR}"
-		echo -e "${RED}exit status: $ret1 vs $ret2${NOCOLOR}"
+		echo -e "${RED}exit status: $ret${NOCOLOR}"
 		fail=1
 		break
 	fi
 
-	diff user.output test.output > diff.output
-	diff user.error test.error > diff.error
+	diff user.output $testoutput > diff.output
 
 	echo
 	echo -e "${BLUE}Compare Result${NOCOLOR}"
@@ -93,27 +89,17 @@ do
 		fail=1
 		break
 	else
-		if [ $(cat diff.error | wc -l) -gt 0 ]
-		then
-			echo -e "${RED}Fail in ex0$num${NOCOLOR}"
-			fail=1
-			break
-		else
-			echo -e "${GREEN}Success ex0$num${NOCOLOR}"
-		fi
+		echo -e "${GREEN}Success ex0$num${NOCOLOR}"
 	fi
 done
 
 rm -rf header_checker
 
-rm -rf test*.out
 rm -rf user*.out
 
-rm -rf test*.output
 rm -rf user*.output
 rm -rf diff.output
 
-rm -rf test*.error
 rm -rf user*.error
 rm -rf diff.error
 
