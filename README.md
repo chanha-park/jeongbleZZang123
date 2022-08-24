@@ -21,6 +21,7 @@ mv regex_example.c ex01
 
 After setup, directory would be like this.
 
+```
 Root
 |- tester/tester.sh
 |- ex00/
@@ -28,9 +29,11 @@ Root
 |- ex02/
 |- ex03/
 |- ex04/
+```
 
 Place your files like below.
 
+```
 Root
 |- tester/tester.sh
 |- ex00/eleven_number_checker.c
@@ -38,7 +41,7 @@ Root
 |- ex02/simple_password_validator.c
 |- ex03/push_swap_instruction_validator.c
 |- ex04/snake_to_camel.c
-
+```
 ## 🛠️  How to use tester
 
 ```
