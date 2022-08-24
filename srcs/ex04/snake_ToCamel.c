@@ -6,15 +6,12 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 10:42:52 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 10:42:53 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:02:33 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <regex.h>
 #include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 static void	WriteCamel(char *str, size_t start, size_t end)
 {
