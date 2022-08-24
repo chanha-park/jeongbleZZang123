@@ -1,6 +1,6 @@
 # Regex Dash
 
-This is the `Regular Expression` Regex Dash project. 
+This is the `Regular Expression` (Regex) Dash project. 
 
 Dash is 30 min to 2 hour long, snacky PBL project.
 You will learn the basics of Regex in our project.
