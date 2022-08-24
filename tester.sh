@@ -14,7 +14,7 @@ filename[0]="eleven_number_checker.c"
 filename[1]="phone_number_checker.c"
 filename[2]="simple_password_validator.c"
 filename[3]="push_swap_instruction_validator.c"
-filename[4]="snake_ToCamel.c"
+filename[4]="snake_to_camel.c"
 
 RED="\x1b[38;5;160m"
 BLUE="\x1b[38;5;38m"
