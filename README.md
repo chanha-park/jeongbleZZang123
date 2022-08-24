@@ -42,7 +42,7 @@ Root
 |- ex03/push_swap_instruction_validator.c
 |- ex04/snake_to_camel.c
 ```
-## 🛠️  How to use tester
+## 🛠️ Tester Usage
 
 ```
 cd ~/tester
