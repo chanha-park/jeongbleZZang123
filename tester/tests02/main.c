@@ -6,7 +6,7 @@
 /*   By: chanhpar <chanhpar@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 10:42:32 by chanhpar          #+#    #+#             */
-/*   Updated: 2022/08/24 14:20:20 by chanhpar         ###   ########.fr       */
+/*   Updated: 2022/08/25 04:45:06 by chanhpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern void	check_leaks(void);
 int	main(void)
 {
 	atexit(check_leaks);
-	simple_password_validator((void *)0);
+	simple_password_validator(NULL);
 	simple_password_validator("");
 	simple_password_validator("banana31@");
 	simple_password_validator("banana31.");
