@@ -18,6 +18,7 @@ filename[4]="snake_ToCamel.c"
 
 RED="\x1b[38;5;160m"
 BLUE="\x1b[38;5;38m"
+GREEN="\x1b[38;5;76m"
 NOCOLOR="\x1b[0;0m"
 
 fail=0
@@ -98,7 +99,7 @@ do
 			fail=1
 			break
 		else
-			echo -e "${BLUE}Success ex0$num${NOCOLOR}"
+			echo -e "${GREEN}Success ex0$num${NOCOLOR}"
 		fi
 	fi
 done
@@ -118,6 +119,6 @@ rm -rf diff.error
 
 if [ $fail == 0 ]
 then
-	echo -e "${BLUE}All Success!${NOCOLOR}"
+	echo -e "${GREEN}All Success!${NOCOLOR}"
 fi
 exit $fail
