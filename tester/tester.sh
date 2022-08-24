@@ -26,7 +26,7 @@ fail=0
 
 echo 'Usage:'
 echo '|- tester/tester.sh'
-for n in 0 1 2 3 4
+for n in $(seq 0 $num_exercise)
 do
 	echo "|- ex0$n/${filename[$n]}"
 done
