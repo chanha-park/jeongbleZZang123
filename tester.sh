@@ -8,7 +8,7 @@ utilsdir="./utils/"
 
 filename[0]="eleven_number_checker.c"
 filename[1]="phone_number_checker.c"
-filename[2]="simple_email_validator.c"
+filename[2]="simple_password_validator.c"
 filename[3]="push_swap_instruction_validator.c"
 filename[4]="snake_ToCamel.c"
 
@@ -16,6 +16,7 @@ fail=0
 
 for num in $(seq 0 $num_exercise)
 do
+	# compile and check error
 	testsrc="$testdir""ex0$num/""${filename[$num]}"
 	usersrc="$userdir""ex0$num/""${filename[$num]}"
 	main="$testdir""ex0$num/""main.c"
@@ -33,6 +34,7 @@ do
 	./user0$num.out > user.output 2> user.error
 	ret2=$(echo $?)
 
+	# check unexpected exit
 	if [ $ret1 != $ret2 ]
 	then
 		echo "Fail in ex0$num"
@@ -44,6 +46,7 @@ do
 	diff user.output test.output > diff.output
 	diff user.error test.error > diff.error
 
+	# diff stdout && stderr
 	if [ $(cat diff.output | wc -l) -gt 0 ]
 	then
 		echo "Fail in ex0$num"
